@@ -35,12 +35,13 @@ document.getElementById('kmlForm').addEventListener('submit', async (event) => {
             }
         }
 
-        // Generate and download the WKT file
+        // Generate and download the TXT file with the same name as the uploaded file
+        const baseFileName = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
         const blob = new Blob([wktArray.join('\n')], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'converted.wkt';
+        a.download = `${baseFileName}.txt`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
